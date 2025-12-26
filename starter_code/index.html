@@ -20,16 +20,19 @@
             <button onclick="loadApp('app2/page2.html')">Load App 2</button>
         </aside>
         <main>
-            <iframe id="content-frame" src=""></iframe>
+            <iframe></iframe>
         </main>
     </div>
-    
     <script>
         function loadApp(url) {
-            document.getElementById('content-frame').src = url;
+            document.querySelector('iframe').src = url
         }
-        
-        // TODO: Add listener for postMessage
+        window.addEventListener("message", (event) => {
+                console.log("Received from iframe:", event.data);
+                let currentColor = document.body.style.backgroundColor;
+                const newColor = currentColor === 'orange' ? 'white' : 'orange';
+                document.body.style.backgroundColor = newColor;
+        });
     </script>
 </body>
 </html>
